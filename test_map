@@ -1,0 +1,20 @@
+import folium
+
+def create_map(mult_ship_coor):
+	m = folium.Map()
+	markers = [i[0] for i in mult_ship_coor]
+	for marker in markers:
+	    folium.Marker(marker,icon=folium.Icon(color='gray',icon=None)).add_to(m)
+	for coordinate in mult_ship_coor:
+	    points = [(i[0],i[1]) for i in coordinate]
+	    folium.PolyLine(points, weight = 2, opacity = 1,color='gray').add_to(m)
+	return m
+
+
+def main():
+	mult_ship_coor = [[(40.66, -111.839682), (40.6774, -111.840), (40.680, -111.845)],[(32.6774, -111.840),(32.9000, -111.845),(33.2000, -111.845)]]
+	m = create_map(mult_ship_coor)
+	m.save('/Users/shaked/Documents/route_map.html')
+
+if __name__ == '__main__':
+	main()
